@@ -1,0 +1,28 @@
+sudo: false
+
+os:
+  - linux
+
+compiler:
+  - gcc
+  - clang
+
+language:
+  - c
+
+services:
+  - docker
+
+before_install:
+  - docker pull ebassi/grapheneci
+
+before_script:
+  - echo FROM ebassi/grapheneci > Dockerfile
+  - echo ADD . /root >> Dockerfile
+  - docker build -t withgit .
+
+script:
+  - docker run withgit /bin/sh -c "cd /root && TRAVIS=1 CC=$CC ./graphene-run-tests.sh"
+  - docker run withgit /bin/sh -c "cd /root && TRAVIS=1 CC=$CC ./graphene-run-tests.sh -Dsse2=false"
+  - docker run withgit /bin/sh -c "cd /root && TRAVIS=1 CC=$CC ./graphene-run-tests.sh -Dsse2=false -Dgcc_vector=false"
+  - docker run withgit /bin/sh -c "cd /root && TRAVIS=1 CC=$CC ./graphene-run-tests.sh -Dgobject_types=false"

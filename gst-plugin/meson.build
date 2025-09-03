@@ -43,7 +43,6 @@ gstaudiofilterexample = library('gstaudiofilterexample',
   'src/gstundistort.cpp',
   ]
 
-
 gstundistortexample = library('gstundistort',
   gstundistort_sources,
   c_args: plugin_c_args,

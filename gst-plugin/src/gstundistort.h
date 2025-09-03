@@ -10,6 +10,7 @@ G_BEGIN_DECLS
 #define GST_UNDISTORT_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_UNDISTORT,GstUndistortClass))
 #define GST_IS_UNDISTORT(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_UNDISTORT))
 #define GST_IS_UNDISTORT_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_UNDISTORT))
+//#define GST_ELEMENT_REGISTER_DECLARE(element) GType gst_##element##_get_type(void)
 
 typedef struct _GstUndistort        GstUndistort;
 typedef struct _GstUndistortClass   GstUndistortClass;

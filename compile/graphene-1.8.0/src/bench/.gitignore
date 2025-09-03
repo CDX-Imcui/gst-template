@@ -1,0 +1,8 @@
+/.deps/
+/.libs/
+/*.csv
+/*.o
+/*.la
+/*.lo
+/*.log
+/matrix-*
