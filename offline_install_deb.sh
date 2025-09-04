@@ -5,8 +5,6 @@ set -e
 
 
 sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
-echo "deb [trusted=yes] file:/deb ./" >> /etc/apt/sources.list
-sudo apt-get update
 
 packages=(libopencv-dev
               build-essential
@@ -33,6 +31,8 @@ packages=(libopencv-dev
               gstreamer1.0-pulseaudio
               )
 for package in "${packages[@]}"; do
+    echo "deb [trusted=yes] file:/deb/$package ./" >> /etc/apt/sources.list
+    sudo apt-get update
     sudo apt-get install -y "$package"
     echo "<<< 已安装 $package"
 done

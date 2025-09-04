@@ -56,7 +56,10 @@ static GstStaticPadTemplate src_template_video =
 /* 类型定义：使用带私有数据的宏 */
 #define gst_undistort_parent_class parent_class
 G_DEFINE_TYPE_WITH_PRIVATE (GstUndistort, gst_undistort, GST_TYPE_VIDEO_FILTER);
+#if GST_CHECK_VERSION(1,20,0)
+//生成元素类型的注册函数,将自定义元素undistort注册到 GStreamer 框架，使其可以被管道识别和使用,
 GST_ELEMENT_REGISTER_DEFINE (undistort, "undistort", GST_RANK_NONE, GST_TYPE_UNDISTORT);
+#endif
 
 /* 前置声明 */
 static void       gst_undistort_set_property (GObject * object, guint prop_id, const GValue * value, GParamSpec * pspec);
@@ -256,7 +259,11 @@ gst_undistort_transform_frame_ip (GstVideoFilter * filter, GstVideoFrame * frame
 static gboolean
 undistort_init (GstPlugin * plugin)
 {
-  return GST_ELEMENT_REGISTER (undistort, plugin);
+#if GST_CHECK_VERSION(1,20,0)
+  return GST_ELEMENT_REGISTER (undistort, plugin);//自动使用 GST_ELEMENT_REGISTER_DEFINE 生成的注册函数
+#else//旧版本的标准注册接口，需要指定元素名称、优先级和类型
+  return gst_element_register (plugin, "undistort", GST_RANK_NONE, GST_TYPE_UNDISTORT);
+#endif
 }
 
 #ifndef PACKAGE

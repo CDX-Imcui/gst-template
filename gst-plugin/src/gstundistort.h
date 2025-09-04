@@ -27,7 +27,7 @@ typedef struct _GstUndistortClass {
 } GstUndistortClass;
 
 GType gst_undistort_get_type (void);
-GST_ELEMENT_REGISTER_DECLARE (undistort)
+//GST_ELEMENT_REGISTER_DECLARE (undistort)
 
 G_END_DECLS
 #endif /* __GST_UNDISTORT_H__ */
